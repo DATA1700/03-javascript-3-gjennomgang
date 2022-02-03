@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<label for="skrivInn">Todo:</label>
+<input id="skrivInn" type="text" placeholder="Skriv inn gjøremål" onchange="leggTil(this.value)">
+
+<h2>Todo:</h2>
+<ul id="liste"></ul>
+</body>
+
+<script>
+    const liste = document.getElementById("liste")
+
+    function leggTil(task) {
+        let ut = "<li>" +
+            "<input type='checkbox'>" +
+            "<span>" + task + "</span>" +
+            "</li>"
+        liste.insertAdjacentHTML('beforeend', ut)
+    }
+</script>
+</html>

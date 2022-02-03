@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" size="2" id="tall1">
+<input type="text" size="2" id="tall2">
+<br>
+<br>
+<button value="+" onclick="kalkuler(this.value)">+</button>
+<button value="-" onclick="kalkuler(this.value)">-</button>
+<button value="*" onclick="kalkuler(this.value)">*</button>
+<button value="/" onclick="kalkuler(this.value)">/</button>
+<br>
+<span id="resultat"></span>
+</body>
+
+<script>
+    function valider(tall1, tall2) {
+        if (isNaN(tall1) || isNaN(tall2)) {
+            document.getElementById("resultat").innerHTML = "Du må skrive inn tall"
+            return false;
+        }
+        return true;
+    }
+
+    function skrivUt(resultat) {
+        document.getElementById("resultat").innerHTML = resultat
+    }
+
+    function kalkuler(type) {
+        const tall1 = document.getElementById("tall1").value;
+        const tall2 = document.getElementById("tall2").value;
+        if (!valider(tall1, tall2)) return
+
+        switch (type) {
+            case "+":
+                skrivUt(tall1 + tall2);
+                break;
+            case "-":
+                skrivUt(tall1 - tall2);
+                break;
+            case "*":
+                skrivUt(tall1 * tall2);
+                break;
+            case "/":
+                skrivUt(tall1 / tall2);
+                break;
+        }
+    }
+</script>
+</html>

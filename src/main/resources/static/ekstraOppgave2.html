@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<label for="skrivInn">Todo:</label>
+<input id="skrivInn" type="text" placeholder="Skriv inn gjøremål" onchange="leggTil(this.value)">
+
+<h2>Todo:</h2>
+<ul id="liste"></ul>
+<ul id="ferdigListe"></ul>
+</body>
+
+<script>
+    const liste = document.getElementById("liste")
+    const ferdigListe = document.getElementById("ferdigListe")
+    let id = 0
+
+    function leggTil(task) {
+        let ut = "<li id='rad-"+id+"'>" +
+            "<input type='checkbox' id='input-"+id+"' onchange='flytt("+id+")'>" +
+            "<span>" + task + "</span>" +
+            "</li>"
+        liste.insertAdjacentHTML('beforeend', ut)
+        document.getElementById("skrivInn").value = ""
+        id++
+    }
+
+    function flytt(id) {
+        const checkbox = document.getElementById("input-"+id)
+        const rad = document.getElementById("rad-"+id)
+        if(checkbox.checked) {
+            rad.style.textDecoration = "line-through"
+            ferdigListe.append(rad)
+        }
+        else {
+            rad.style.textDecoration = "none"
+            liste.append(rad)
+        }
+
+    }
+</script>
+</html>

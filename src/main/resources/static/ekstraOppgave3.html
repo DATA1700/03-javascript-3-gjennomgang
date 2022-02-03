@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<button onclick="skrivUtOppgaver()">Ta test!</button>
+<ul id="liste"></ul>
+
+</body>
+<script>
+    const liste = document.getElementById("liste")
+    const oppgaver = []
+
+    const oppgave1 = {
+        sporsmol: "Når er frist for oblig 1?",
+        alternativer: ['3', '5', '6.februar', '12.februar'],
+        riktigIndex: 2
+    }
+
+    const oppgave2 = {
+        sporsmol: "Hvor mange obliger er det i dette faget?",
+        alternativer: ['3', '5', 'ingen', '2'],
+        riktigIndex: 0
+    }
+
+    const oppgave3 = {
+        sporsmol: "Hva står API for?",
+        alternativer: ['App Program Instruction', 'Application Programming Interface', 'Det er ikke en forkortelse'],
+        riktigIndex: 1
+    }
+    oppgaver.push(oppgave1, oppgave2, oppgave3)
+
+    function skrivUtOppgaver() {
+        let ut = ""
+        let id = 0
+        let oppgaveIndex = 0
+
+        for (let oppgave of oppgaver) {
+            ut += "<li>" +
+                "<h4>" + oppgave.sporsmol + "</h4>" +
+                "<div>"
+            for (let alternativ of oppgave.alternativer) {
+                id++
+                ut += "<label for='" + id + "'>" + alternativ + "</label>" +
+                    "<input id='" + id + "' type='radio' value='" + alternativ + "' name='oppgave" + oppgaveIndex + "'>"
+            }
+            ut +="</div>"
+            ut += "</li>"
+            oppgaveIndex++
+        }
+        ut += "<button onclick='sjekkSvar()'>Sjekk svar"
+        liste.innerHTML = ut
+    }
+
+    function sjekkSvar() {
+        let riktigSvar = 0
+        for(let oppgaveIndex = 0; oppgaveIndex < oppgaver.length; oppgaveIndex++) {
+            const radioKnapper = document.querySelectorAll('[name="oppgave-"'+oppgaveIndex+'"]')
+            let svar
+            for(let alternativ of radioKnapper) {
+                if(alternativ.checked) {
+                    svar = alternativ.value
+                    break
+                }
+            }
+            if(sjekkOmRiktig(oppgaveIndex, svar)) {
+                riktigSvar++
+            }
+
+        }
+        liste.innerHTML = ""
+        alert(riktigSvar + " av " + oppgaver.length + " oppgaver er riktig")
+
+    }
+
+    function sjekkOmRiktig(oppgaveIndex, svar) {
+        const oppgave = oppgaver[oppgaveIndex]
+        if(oppgave.riktigIndex === oppgave.alternativer.indexOf(svar)) {
+            return true;
+        }
+        return false;
+    }
+
+</script>
+</html>

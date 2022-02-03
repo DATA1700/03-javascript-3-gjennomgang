@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>Personregister</h2>
+<table>
+    <tr>
+        <td>Navn</td>
+        <td><input type="text" id="navn"></td>
+    </tr>
+    <tr>
+        <td>Adresse</td>
+        <td><input type="text" id="adresse"></td>
+    </tr>
+    <tr>
+        <td>Telefonnr</td>
+        <td><input type="text" id="telefonnr"></td>
+    </tr>
+    <tr>
+        <td>
+            <button onclick="registrer()">Registrer</button>
+        </td>
+        <td>
+            <button onclick="slett()">Slett</button>
+        </td>
+    </tr>
+</table>
+
+<div id="personRegister"></div>
+
+</body>
+
+<script>
+
+    let personer = []
+
+    function registrer() {
+        const navn = document.getElementById("navn")
+        const adresse = document.getElementById("adresse")
+        const telefonnr = document.getElementById("telefonnr")
+
+        const person = {
+            navn: navn.value,
+            adresse: adresse.value,
+            telefonnr: telefonnr.value
+        }
+
+        personer.push(person)
+        navn.value = ""
+        adresse.value = ""
+        telefonnr.value = ""
+        visPersonRegister()
+    }
+
+    function slett() {
+        personer.splice(0)
+        visPersonRegister()
+    }
+
+    function visPersonRegister() {
+        let ut = "<table><tr>" +
+            "<th>Navn</th>" +
+            "<th>Adresse</th>" +
+            "<th>Telefonr</th>" +
+            "</tr>"
+
+        for (let person of personer) {
+            ut += "<tr><td>" + person.navn + "</td><td>" +
+                person.adresse + "</td><td>" +
+                person.telefonnr + "</td></tr>"
+        }
+        ut += "</table>"
+        document.getElementById("personRegister").innerHTML = ut
+    }
+</script>
+</html>
