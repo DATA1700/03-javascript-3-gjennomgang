@@ -43,9 +43,9 @@
                 "<h4>" + oppgave.sporsmol + "</h4>" +
                 "<div>"
             for (let alternativ of oppgave.alternativer) {
-                id++
                 ut += "<label for='" + id + "'>" + alternativ + "</label>" +
-                    "<input id='" + id + "' type='radio' value='" + alternativ + "' name='oppgave" + oppgaveIndex + "'>"
+                    "<input id='" + id + "' type='radio' value='" + alternativ + "' name='oppgave-" + oppgaveIndex + "'>"
+                id++
             }
             ut +="</div>"
             ut += "</li>"
@@ -58,11 +58,13 @@
     function sjekkSvar() {
         let riktigSvar = 0
         for(let oppgaveIndex = 0; oppgaveIndex < oppgaver.length; oppgaveIndex++) {
-            const radioKnapper = document.querySelectorAll('[name="oppgave-"'+oppgaveIndex+'"]')
-            let svar
+            const radioKnapper = document.querySelectorAll('[name="oppgave-' + oppgaveIndex + '"]')
+            let svar =""
+
             for(let alternativ of radioKnapper) {
                 if(alternativ.checked) {
                     svar = alternativ.value
+                    console.log(svar)
                     break
                 }
             }
